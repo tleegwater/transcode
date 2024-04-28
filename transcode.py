@@ -28,7 +28,7 @@ def TG4_AVCINTRA(infile, outfile, ar, scale_up=True, crop=False):
 		['ffmpeg',
 		 '-loglevel', 'debug',
 		 '-i', infile,
-		 '-ss', "0",
+		 '-ss', "60",
 		 '-t', "30",
 		 '-acodec', 'pcm_s24le',
 		 '-vf', vf,
