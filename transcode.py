@@ -153,10 +153,10 @@ def TG4_AS11_REWRAP(infile, outfile, ar, start_clock_tc, start_programme_tc, dur
 		 '-o', outfile,
 		 infile
 		 ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	#for line in bmx_process.stdout:
-	#	print(line.decode('utf-8'))
+	for line in bmx_process.stdout:
+		print(line.decode('utf-8'))
 	bmx_process.communicate()
-	#print('bmx_process.returncode', bmx_process.returncode)
+	print('bmx_process.returncode', bmx_process.returncode)
 	os.remove(AS11CoreFile)
 	os.remove(AS11UKDPPFile)
 	os.remove(AS11SegmentFile)
