@@ -17,7 +17,7 @@ logging.basicConfig(format='%(asctime)s :: %(levelname)s :: %(funcName)s :: %(me
 def TG4_AVCINTRA(infile, outfile, ar, scale_up=True, crop=False):
 	vf = "colormatrix=bt601:bt709,setsar=sar=1/1,setdar=dar=4/3,scale=1440:1080:interl=1:flags=lanczos,pad=1920:1080:(ow-iw)/2:(oh-ih)/2"
 	if ar == "16:9":
-		if not crop:	
+		if not crop:
 			vf = "colormatrix=bt601:bt709,setsar=sar=1/1,setdar=dar=16/9,scale=1920:1080:interl=1:flags=lanczos"
 		else:
 			vf = "colormatrix=bt601:bt709,setsar=sar=1/1,setdar=dar=16/9,crop=1440:1080,scale=1920:1080:interl=1:flags=lanczos"
@@ -28,8 +28,8 @@ def TG4_AVCINTRA(infile, outfile, ar, scale_up=True, crop=False):
 		['ffmpeg',
 		 '-loglevel', 'debug',
 		 '-i', infile,
-		 #'-ss', "0",
-		 #-t', "30",
+		 '-ss', "0",
+		 '-t', "30",
 		 '-acodec', 'pcm_s24le',
 		 '-vf', vf,
 		 '-vcodec', 'libx264',
