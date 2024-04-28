@@ -243,7 +243,7 @@ if __name__ == '__main__':
 		start_tc = Timecode(framerate, timecode)
 		start_tc.set_fractional(False)
 		duration = Timecode(framerate, "00:00:{}".format(duration_secs))
-		#duration = Timecode(framerate, "00:00:30:00")
+		duration = Timecode(framerate, "00:00:30:00")
 		duration.set_fractional(False)
 
 		if str(project_name) == "TG4":
