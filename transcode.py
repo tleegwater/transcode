@@ -23,7 +23,7 @@ def TG4_AVCINTRA(infile, outfile, ar, scale_up=True, crop=False):
 			vf = "colormatrix=bt601:bt709,setsar=sar=1/1,setdar=dar=16/9,crop=1440:1080,scale=1920:1080:interl=1:flags=lanczos"
 	if not scale_up:
 		vf = "colormatrix=bt601:bt709,setsar=sar=1/1,setdar=dar=16/9"
-
+	print(vf)
 	ffmpeg_process = subprocess.Popen(
 		['ffmpeg',
 		 '-loglevel', 'debug',
