@@ -23,13 +23,12 @@ def TG4_AVCINTRA(infile, outfile, ar, scale_up=True, crop=False):
 			vf = "colormatrix=bt601:bt709,setsar=sar=1/1,setdar=dar=16/9,crop=1440:1080,scale=1920:1080:interl=1:flags=lanczos"
 	if not scale_up:
 		vf = "colormatrix=bt601:bt709,setsar=sar=1/1,setdar=dar=16/9"
-	print(vf)
 	ffmpeg_process = subprocess.Popen(
 		['ffmpeg',
 		 '-loglevel', 'debug',
 		 '-i', infile,
-		 '-ss', "60",
-		 '-t', "30",
+		 #'-ss', "60",
+		 #'-t', "30",
 		 '-acodec', 'pcm_s24le',
 		 '-vf', vf,
 		 '-vcodec', 'libx264',
@@ -243,7 +242,7 @@ if __name__ == '__main__':
 		start_tc = Timecode(framerate, timecode)
 		start_tc.set_fractional(False)
 		duration = Timecode(framerate, "00:00:{}".format(duration_secs))
-		duration = Timecode(framerate, "00:00:30:00")
+		#duration = Timecode(framerate, "00:00:30:00")
 		duration.set_fractional(False)
 
 		if str(project_name) == "TG4":
