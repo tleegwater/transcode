@@ -136,7 +136,7 @@ def TG4_AS11_REWRAP(infile, outfile, ar, start_clock_tc, start_programme_tc, dur
 		afd = 10
 
 	bmx_process = subprocess.Popen(
-		['bmxtranswrap',
+		['/Users/nextarchive/bmx/out/build/apps/bmxtranswrap/bmxtranswrap',
 		 '--log-level', '0',
 		 '-y', str(start_clock_tc),
 		 '--ps-avcihead',
@@ -165,7 +165,7 @@ def TG4_AS11_REWRAP(infile, outfile, ar, start_clock_tc, start_programme_tc, dur
 
 def IMX_REWRAP(infile, outfile, ar):
 	bmx_process = subprocess.Popen(
-		['bmxtranswrap',
+		['/Users/nextarchive/bmx/out/build/apps/bmxtranswrap/bmxtranswrap',
 		 '--log-level', '0',
 		 '-t', 'd10',
 		 '-a', ar,
