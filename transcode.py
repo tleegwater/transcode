@@ -199,6 +199,33 @@ def ffprobe(file_path):
 	metadata = json.loads(result.stdout)
 	return metadata
 
+def getTimecode(media_info):
+	timecode = "00:00:00:00"
+	framerate = "1/1"
+	for stream in media_info["streams"]:
+		if "timecode" in stream["tags"]:
+			timecode = stream["tags"]["timecode"]
+		if "r_frame_rate" in stream and stream["codec_type"] == "video":
+			framerate = stream["r_frame_rate"]
+
+	tc = Timecode(framerate, timecode)
+	tc.set_fractional(False)
+	return tc
+
+def getDuration(media_info):
+	duration_secs = "0.0"
+	framerate = "1/1"
+
+	for stream in media_info["streams"]:
+		if "duration" in stream:
+			duration_secs = stream["duration"]
+		if "r_frame_rate" in stream and stream["codec_type"] == "video":
+			framerate = stream["r_frame_rate"]
+
+	duration = Timecode(framerate, "00:00:{}".format(duration_secs))
+	duration.set_fractional(False)
+	return duration
+
 if __name__ == '__main__':
 
 	parser = argparse.ArgumentParser(description='Transcode raw captures into delivery files.')
@@ -235,15 +262,11 @@ if __name__ == '__main__':
 		ar = getAspect(input_file)
 		stem = input_file.stem
 		media_info = ffprobe(input_file)
-		framerate = media_info["streams"][0]["r_frame_rate"]
-		#timecode = media_info["streams"][0]["tags"]["timecode"]
-		timecode = "00:00:00:00"
-		duration_secs = media_info["streams"][0]["duration"]
-		start_tc = Timecode(framerate, timecode)
-		start_tc.set_fractional(False)
-		duration = Timecode(framerate, "00:00:{}".format(duration_secs))
-		#duration = Timecode(framerate, "00:00:30:00")
-		duration.set_fractional(False)
+
+		start_tc = getTimecode(media_info)
+		#print("start_tc: ", start_tc)
+		duration = getDuration(media_info)
+		#print("duration: ", duration)
 
 		if str(project_name) == "TG4":
 			mxfTempFile = "{}/{}_temp.mxf".format(output_dir.as_posix(), stem)
